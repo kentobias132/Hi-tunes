@@ -1,17 +1,20 @@
-import React from 'react'
-import Track from './Track'
+import React from "react";
+import Track from "./Track";
 
-
-
-function Tracklist({name, artist, album, id}) {
-
-    return (
-    <>
-        <div>Tracklist</div>
-        <Track name={name} artist={artist} album={album} id={id} />
-    </>
-        
-  )
+function Tracklist({ userSearchResult, isRemoval, onAdd, onRemove }) {
+  return (
+    <div>
+      {userSearchResult.map((track) => (
+        <Track
+          track={track}
+          key={track.id}
+          isRemove={isRemoval}
+          onAdd={onAdd}
+          onRemove={onRemove}
+        />
+      ))}
+    </div>
+  );
 }
 
-export default Tracklist
+export default Tracklist;

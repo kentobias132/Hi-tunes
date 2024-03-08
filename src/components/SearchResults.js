@@ -1,23 +1,18 @@
-import React from 'react'
-import Tracklist from './Tracklist'
-import Track from './Track'
+import React from "react";
+import Tracklist from "./Tracklist";
+import Track from "./Track";
 
-const mockdata = [
-  { name: 'Unavailabe', artist: 'DavidOOfficial', album: 'Timeless', id:  '1' },
-  { name: 'Skin To Skin', artist: 'The Police', album: 'Ghost in the Machine', id: '2' },
-  { name: 'we move', artist: 'jonneydrill', album: 'My Life', id: '3' },
-  {name: 'Fatherly Love', artist: 'Tekno', album: 'Rebel Heart', id:'4'}
-]
-
-function SearchResults() {
+function SearchResults({ userSearchResult, onAdd }) {
   return (
-    <div className=' border-2 bg-purple-950  '>
-          <h1 className='text-white font-extrabold'> Results</h1>
-          {mockdata.map(data => <Tracklist name={data.name} artist={data.artist} album={data.album} id={data.id} />)}
-        {/* <Tracklist name={name} artist={artist} album={album} id={id} /> */}
-      </div>
-    
-  )
+    <div className="bg-blue-950 px-3 py-3 w-1/2 mx-8 ">
+      <h1 className="text-white font-extrabold"> Results</h1>
+      <Tracklist
+        userSearchResult={userSearchResult}
+        isRemoval={false}
+        onAdd={onAdd}
+      />
+    </div>
+  );
 }
 
-export default SearchResults
+export default SearchResults;
