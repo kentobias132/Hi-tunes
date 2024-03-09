@@ -20,7 +20,23 @@ function App() {
     { name: "we move", artist: "jonneydrill", album: "My Life", id: "3" },
     { name: "Fatherly Love", artist: "Tekno", album: "Rebel Heart", id: "4" },
   ]);
-
+  const [playListName, setPlayListName] = useState('Example playlistname')
+  const [playListTrack, setPlayListTrack] = useState([ {
+      name: "Example1",
+      artist: "DavidOOfficial",
+      album: "Timeless",
+      id: "1",
+    },
+    {
+      name: "Example2",
+      artist: "The Police",
+      album: "Ghost in the Machine",
+      id: "2",
+    },
+    { name: "Example3", artist: "jonneydrill", album: "My Life", id: "3" },
+    { name: "Example4", artist: "jonneydrill", album: "My Life", id: "3" },
+    { name: "Example5", artist: "jonneydrill", album: "My Life", id: "3" },
+    { name: "Example6", artist: "Tekno", album: "Rebel Heart", id: "4" },])
   return (
     <div className=" bg-[url('./img/background_photo.jpg')] bg-cover">
       <nav className="text-center bg-blue-950 text-white text-2xl py-3">
@@ -30,7 +46,7 @@ function App() {
         <SearchBar />
         <div className="flex flex-row my-12 w-9/12 mx-auto">
           <SearchResults userSearchResult={searchData} />
-          <Playlist />
+          <Playlist playListName={playListName} playListTrack={playListTrack} />
         </div>
       </div>
     </div>
