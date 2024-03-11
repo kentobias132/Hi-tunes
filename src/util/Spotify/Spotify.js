@@ -31,10 +31,36 @@ const Spotify = {
 
   async search(term) {
     accessToken = Spotify.getAccessToken();
-    const searchData = await fetch(
-      `https://api.spotify.com/v1/search?type=track&q=${term}`,
-      { method: "GET", headers: { Authorization: `Bearer ${accessToken}` } }
-    );
+
+    try {
+      const response = await fetch(
+        `https://api.spotify.com/v1/search?type=track&q=${term}`,
+        {
+          method: "GET",
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data.tracks.items);
+        const tracksDetailsResponse = data.tracks.items;
+
+        const tracks = tracksDetailsResponse.map((track) => ({
+          id: track.id,
+          name: track.name,
+          artist: track.artists[0].name,
+          album: track.album.name,
+          uri: track.uri,
+        }));
+
+        return tracks;
+      } else {
+        console.log("Response error");
+      }
+    } catch (error) {
+      console.log(error);
+    }
 
     const data = await searchData.json();
   },
