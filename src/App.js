@@ -58,19 +58,35 @@ function App() {
     setPlayListTrack(playListTrack.filter(({ id }) => id !== track.id));
   };
 
+  const savePlaylist = () => {
+    const trackUrls = playListTrack.map(t => t.url)
+  }
+
+  function handleSearch(term) {
+    // setSearchData(
+    //   searchData.filter((track) =>
+    //     track.name.toLowerCase().includes(term.toLowerCase())
+    //   )
+    // );
+
+    console.log(term);
+  }
+
+
   return (
-    <div className=" bg-[url('./img/background_photo.jpg')] bg-cover">
+    <div className="min-h-screen bg-[url('./img/background_photo.jpg')] bg-cover">
       <nav className="text-center bg-blue-950 text-white text-2xl py-3">
         Hi Tunes
       </nav>
       <div className="flex justify-center flex-col items-center mt-6">
-        <SearchBar />
+        <SearchBar onSearch={handleSearch} />
         <div className="flex flex-row my-12 w-9/12 mx-auto">
           <SearchResults userSearchResult={searchData} onAdd={addTrack} />
           <Playlist
             onNameChange={updatePlaylistName}
             playListTrack={playListTrack}
             onRemove={removeTrack}
+            onSave={savePlaylist}
           />
         </div>
       </div>

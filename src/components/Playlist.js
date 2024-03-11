@@ -2,7 +2,7 @@ import React from "react";
 import Tracklist from "./Tracklist";
 import Button from "./Button";
 
-function Playlist({ onNameChange, playListTrack, onRemove }) {
+function Playlist({ onNameChange, playListTrack, onRemove, onSave }) {
   function handleNameChange({ target }) {
     onNameChange(target.value);
   }
@@ -21,7 +21,7 @@ function Playlist({ onNameChange, playListTrack, onRemove }) {
         onRemove={onRemove}
       />
       <div className="py-6 flex justify-center">
-        <Button text={"Add to Spotify"} />
+        <Button text={"Add to Spotify"} clickHandler={onSave}/>
       </div>
     </div>
   );
