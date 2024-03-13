@@ -12,7 +12,9 @@ function Playlist({ onNameChange, playListTrack, onRemove, onSave }) {
       <h1 className="text-white font-extrabold"> Playlist </h1>
       <input
         className="bg-transparent border-b-[1px] py-2 w-[80%] outline-none text-white mb-5 "
-        defaultValue={"New Playlist"}
+        // defaultValue={"New Playlist"}
+        placeholder="Playlist Name"
+        type="text"
         onChange={handleNameChange}
       />
       <Tracklist
@@ -21,7 +23,7 @@ function Playlist({ onNameChange, playListTrack, onRemove, onSave }) {
         onRemove={onRemove}
       />
       <div className="py-6 flex justify-center">
-        <Button text={"Add to Spotify"} clickHandler={onSave}/>
+        <Button text={"Add to Spotify"} clickHandler={onSave} />
       </div>
     </div>
   );

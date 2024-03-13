@@ -61,9 +61,78 @@ const Spotify = {
     } catch (error) {
       console.log(error);
     }
+  },
 
-    const data = await searchData.json();
+  // Save playlist to spotify app function
+  async savePlaylist(name, trackURI) {
+    // fetch access token and api url
+    const token = Spotify.getAccessToken();
+    const apiUrl = "https://api.spotify.com/v1";
+    const header = { Authorization: `Bearer ${token}` };
+
+    try {
+      if (!name || !trackURI) {
+        throw new Error(
+          "Please enter a valid playlist name or add song to playlist"
+        );
+      }
+      // get user profile details
+      const userId = await getUserProfile();
+
+      // create playlist
+      const playlistId = await createPlaylist(name, userId);
+
+      // add track to playlist
+      const playlistTrack = await addTrackToPlaylist(playlistId, trackURI);
+
+      return playlistTrack;
+    } catch (error) {
+      console.error(`Error in saving playlist to spotify: ${error}`);
+    }
+
+    async function getUserProfile() {
+      let response = await fetch(`${apiUrl}/me`, { headers: header });
+      if (!response.ok) {
+        throw new Error("Fail to fetch user profile");
+      }
+      let user = await response.json();
+      return user.id;
+    }
+
+    async function createPlaylist(name, userId) {
+      let response = await fetch(`${apiUrl}/users/${userId}/playlists`, {
+        method: "post",
+        body: JSON.stringify({ name: name }),
+        headers: header,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create playlist");
+      }
+
+      let playlist = await response.json();
+      console.log(playlist);
+      return playlist.id;
+    }
+
+    async function addTrackToPlaylist(playlistId, trackURI) {
+      const response = await fetch(`${apiUrl}/playlists/${playlistId}/tracks`, {
+        method: "post",
+        headers: header,
+        body: JSON.stringify({ uris: trackURI }),
+      });
+
+      console.log(playlistId, trackURI);
+      alert("Playlist added to your  Spotify account successfully");
+      window.location.reload();
+      if (!response.ok) {
+        throw new Error("Fail to add track to playlist");
+      }
+      return response;
+    }
   },
 };
 
 export default Spotify;
+
+// Error in saving playlist to spotify: Error: Fail to add track to playlist

@@ -2,43 +2,27 @@ import React, { useState } from "react";
 import SearchBar from "./components/SearchBar";
 import SearchResults from "./components/SearchResults";
 import Playlist from "./components/Playlist";
+import Spotify from "./util/Spotify/Spotify";
 
 function App() {
   const [searchData, setSearchData] = useState([
-    {
-      name: "Unavailabe",
-      artist: "DavidOOfficial",
-      album: "Timeless",
-      id: "1",
-    },
-    {
-      name: "Skin To Skin",
-      artist: "The Police",
-      album: "Ghost in the Machine",
-      id: "2",
-    },
-    { name: "we move", artist: "jonneydrill", album: "My Life", id: "3" },
-    { name: "Fatherly Love", artist: "Tekno", album: "Rebel Heart", id: "4" },
+    //   {
+    //     name: "Unavailabe",
+    //     artist: "DavidOOfficial",
+    //     album: "Timeless",
+    //     id: "1",
+    //   },
+    //   {
+    //     name: "Skin To Skin",
+    //     artist: "The Police",
+    //     album: "Ghost in the Machine",
+    //     id: "2",
+    //   },
+    //   { name: "we move", artist: "jonneydrill", album: "My Life", id: "3" },
+    //   { name: "Fatherly Love", artist: "Tekno", album: "Rebel Heart", id: "4" },
   ]);
-  const [playListName, setPlayListName] = useState("Example playlistname");
-  const [playListTrack, setPlayListTrack] = useState([
-    {
-      name: "Example1",
-      artist: "DavidOOfficial",
-      album: "Timeless",
-      id: "5",
-    },
-    {
-      name: "Example2",
-      artist: "The Police",
-      album: "Ghost in the Machine",
-      id: "6",
-    },
-    { name: "Example3", artist: "jonneydrill", album: "My Life", id: "7" },
-    { name: "Example4", artist: "jonneydrill", album: "My Life", id: "8" },
-    { name: "Example5", artist: "jonneydrill", album: "My Life", id: "9" },
-    { name: "Example6", artist: "Tekno", album: "Rebel Heart", id: "10" },
-  ]);
+  const [playListName, setPlayListName] = useState("");
+  const [playListTrack, setPlayListTrack] = useState([]);
 
   const updatePlaylistName = (name) => {
     setPlayListName(name);
@@ -48,7 +32,6 @@ function App() {
     const existingTrack = playListTrack.find(({ id }) => id === track.id);
     if (!existingTrack) {
       setPlayListTrack([...playListTrack, track]);
-      console.log(playListName);
     } else {
       console.log(`${track.name} from ${track.artist} already exists`);
     }
@@ -59,19 +42,18 @@ function App() {
   };
 
   const savePlaylist = () => {
-    const trackUrls = playListTrack.map(t => t.url)
-  }
+    const trackUrls = playListTrack.map((t) => t.uri);
+    Spotify.savePlaylist(playListName, trackUrls).then(() => {
+      setPlayListName("");
+      setPlayListTrack([]);
+    });
+  };
 
   function handleSearch(term) {
-    // setSearchData(
-    //   searchData.filter((track) =>
-    //     track.name.toLowerCase().includes(term.toLowerCase())
-    //   )
-    // );
+    Spotify.search(term).then((response) => setSearchData(response));
 
     console.log(term);
   }
-
 
   return (
     <div className="min-h-screen bg-[url('./img/background_photo.jpg')] bg-cover">
