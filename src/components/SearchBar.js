@@ -13,10 +13,10 @@ function SearchBar({ onSearch }) {
   };
 
   return (
-    <div className=" mt-9  ">
+    <div className=" mt-9 w-[20%]">
       <div>
         <input
-          className="outline-none p-2 rounded border pa border-sky-400"
+          className="outline-none p-2 rounded border pa w-full"
           type="text"
           name="search"
           placeholder="Search your favourite music"

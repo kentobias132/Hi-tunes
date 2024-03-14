@@ -5,22 +5,7 @@ import Playlist from "./components/Playlist";
 import Spotify from "./util/Spotify/Spotify";
 
 function App() {
-  const [searchData, setSearchData] = useState([
-    //   {
-    //     name: "Unavailabe",
-    //     artist: "DavidOOfficial",
-    //     album: "Timeless",
-    //     id: "1",
-    //   },
-    //   {
-    //     name: "Skin To Skin",
-    //     artist: "The Police",
-    //     album: "Ghost in the Machine",
-    //     id: "2",
-    //   },
-    //   { name: "we move", artist: "jonneydrill", album: "My Life", id: "3" },
-    //   { name: "Fatherly Love", artist: "Tekno", album: "Rebel Heart", id: "4" },
-  ]);
+  const [searchData, setSearchData] = useState([]);
   const [playListName, setPlayListName] = useState("");
   const [playListTrack, setPlayListTrack] = useState([]);
 
@@ -49,8 +34,10 @@ function App() {
     });
   };
 
-  function handleSearch(term) {
-    Spotify.search(term).then((response) => setSearchData(response));
+  async function handleSearch(term) {
+    const searchResponse = await Spotify.search(term);
+
+    setSearchData(searchResponse);
 
     console.log(term);
   }

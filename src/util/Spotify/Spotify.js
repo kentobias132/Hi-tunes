@@ -41,23 +41,22 @@ const Spotify = {
         }
       );
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data.tracks.items);
-        const tracksDetailsResponse = data.tracks.items;
-
-        const tracks = tracksDetailsResponse.map((track) => ({
-          id: track.id,
-          name: track.name,
-          artist: track.artists[0].name,
-          album: track.album.name,
-          uri: track.uri,
-        }));
-
-        return tracks;
-      } else {
-        console.log("Response error");
+      if (!response.ok) {
+        throw new Error("Search terms error");
       }
+      const data = await response.json();
+      console.log(data.tracks.items);
+      const tracksDetailsResponse = data.tracks.items;
+
+      const tracks = tracksDetailsResponse.map((track) => ({
+        id: track.id,
+        name: track.name,
+        artist: track.artists[0].name,
+        album: track.album.name,
+        uri: track.uri,
+      }));
+
+      return tracks;
     } catch (error) {
       console.log(error);
     }
@@ -72,6 +71,7 @@ const Spotify = {
 
     try {
       if (!name || !trackURI) {
+        alert("Please enter a valid playlist name or add song to playlist");
         throw new Error(
           "Please enter a valid playlist name or add song to playlist"
         );
@@ -134,5 +134,3 @@ const Spotify = {
 };
 
 export default Spotify;
-
-// Error in saving playlist to spotify: Error: Fail to add track to playlist
