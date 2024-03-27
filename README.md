@@ -23,7 +23,7 @@ To run the application locally, follow these steps:
 1. Clone the repository:
 
    ```bash
-   git clone <https://github.com/kentobias132/Hi-tunes.git>
+   git clone https://github.com/kentobias132/Hi-tunes.git
    ```
 
 2. Install dependencies:
