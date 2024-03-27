@@ -14,7 +14,7 @@ HiTunes is a web application that allows users to search for songs on Spotify an
 
 - React: A JavaScript library for building user interfaces.
 - Spotify API: Used to search for songs and manage playlists.
-- HTML/TAILWIND: For structuring and styling the user interface.
+- Tailwind: For structuring and styling the user interface.
 
 ## Installation
 
@@ -22,15 +22,15 @@ To run the application locally, follow these steps:
 
 1. Clone the repository:
 
-   \```bash
+   ```bash
    git clone <repository-url>
-   \```
+   ```
 
 2. Install dependencies:
 
-   \```bash
+   ```bash
    npm install
-   \```
+   ```
 
 3. Set up Spotify API credentials:
 
@@ -40,9 +40,9 @@ To run the application locally, follow these steps:
 
 4. Run the application:
 
-   \```bash
+   ```bash
    npm start
-   \```
+   ```
 
 ## Usage
 
@@ -66,26 +66,24 @@ Contributions are welcome! If you'd like to contribute to the project, please fo
 
 2. Create a new branch for your feature or bug fix:
 
-   \```bash
+   ```bash
    git checkout -b feature/your-feature-name
-   \```
+   ```
 
 3. Make your changes and commit them:
 
-   \```bash
+   ```bash
    git commit -am 'Add some feature'
-   \```
+   ```
 
 4. Push to your branch:
 
-   \```bash
+   ```bash
    git push origin feature/your-feature-name
-   \```
+   ```
 
 5. Open a pull request with a detailed description of your changes.
 
-## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 
